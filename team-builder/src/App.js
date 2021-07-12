@@ -23,7 +23,7 @@ function App() {
 
   const submitForm = () => {
     const { name, email, role } = formValues
-    setTeam([
+    setFormValues([
       ...formValues,
       {
         name: name.trim(),
