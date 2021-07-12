@@ -1,26 +1,40 @@
-import React, { useState } from 'react'
+import React from 'react'
 
-const initialFormValues = {
-    name: '',
-    email: '',
-    role: '',
-}
+export default function Form(props) {
+    const { values, update, submit } = props
 
-export default function Form() {
-    const [formValues, setFormValues] = useState(initialFormValues)
+    const onChange = evt => {
+        const name = evt.target.name
+        const value = evt.target.value
+        update(name, value)
+    }
+
+    const onSubmit = evt => {
+        evt.preventDefault()
+        submit()
+    }
 
     return (
-        <form>
+        <form onSubmit={onSubmit}>
             <div>
-                <label>
-                    <input type='text'></input>
+                <label>Name
+                    <input type='text' onChange={onChange} name='name'></input>
                 </label>
-                <label>
-                    <input type='text'></input>
+                <label>Email
+                    <input type='email' onChange={onChange} name='email'></input>
                 </label>
-                <label>
-                    <input type='text'></input>
+                <label>Role
+                    <select onChange={onChange} name='role' value={values.role}>
+                        <option value=''>-- Select Role --</option>
+                        <option value='student'>Student</option>
+                        <option value='instructor'>Instructor</option>
+                        <option value='alumni'>Alumni</option>
+                    </select>
                 </label>
+
+                <div className='submit'>
+                    <button>submit</button>
+                </div>
             </div>
         </form>
     )
